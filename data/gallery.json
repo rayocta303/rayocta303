@@ -1,0 +1,60 @@
+[
+    {
+        "id": 1,
+        "title": "System Architecture",
+        "images": [
+            "https://placehold.co/800x600/1a1a1a/ffffff?text=Architecture+Main",
+            "https://placehold.co/800x600/000000/ffffff?text=Microservices+Diagram",
+            "https://placehold.co/800x600/2a2a2a/ffffff?text=Data+Flow"
+        ],
+        "desc": "The system architecture is built on a **microservices-based** approach, ensuring high scalability and fault tolerance. Each component operates independently, communicating via lightweight protocols.\n\n- **Frontend:** Built with Alpine.js and Tailwind CSS for a reactive, lightweight user experience.\n- **Backend:** Powered by Node.js and Go for concurrent processing.\n- **Database:** Utilizing MariaDB for structured data and Redis for high-speed caching.\n\nThis architecture allows for seamless updates and maintenance, ensuring that the system remains robust even under high load conditions."
+    },
+    {
+        "id": 2,
+        "title": "Edge Computing",
+        "images": [
+            "https://placehold.co/800x600/1a1a1a/ffffff?text=Edge+Node",
+            "https://placehold.co/800x600/000000/ffffff?text=Sensor+Integration"
+        ],
+        "desc": "Our edge computing nodes are designed to process data closer to the source, significantly reducing latency and bandwidth usage.\n\nKey features include:\n\n- **Real-time Analytics:** Immediate processing of sensor data.\n- **Offline Capability:** Continues operation even without internet connectivity.\n- **Security:** Hardware-level encryption for data integrity.\n\nThese nodes serve as the backbone for our IoT implementation, bridging the physical and digital worlds."
+    },
+    {
+        "id": 3,
+        "title": "Dashboard UI",
+        "images": [
+            "https://placehold.co/800x600/1a1a1a/ffffff?text=Dashboard+Overview",
+            "https://placehold.co/800x600/000000/ffffff?text=Real-time+Graphs",
+            "https://placehold.co/800x600/2a2a2a/ffffff?text=Alert+Panel"
+        ],
+        "desc": "The main control dashboard provides a comprehensive visualization of the entire network. Designers focused on usability and information density.\n\nIt features dynamic widgets that display:\n\n- System Health Status\n- Real-time Traffic Flows\n- Active User Sessions\n- Critical Alerts and Notifications\n\nThe interface is fully responsive, ensuring accessibility from desktop control centers to mobile field units."
+    },
+    {
+        "id": 4,
+        "title": "Network Topology",
+        "images": [
+            "https://placehold.co/800x600/1a1a1a/ffffff?text=Mesh+Network",
+            "https://placehold.co/800x600/000000/ffffff?text=Node+Connections"
+        ],
+        "desc": "A visualization of our mesh network topology, highlighting the redundant paths and self-healing capabilities of the grid.\n\nTechnical highlights:\n\n- **Routing Protocol:** Custom variation of OLSR (Optimized Link State Routing).\n- **Throughput:** Up to 1Gbps per node in optimal conditions.\n- **Latency:** <10ms node-to-node hop time.\n\nThis robust network layer guarantees that critical data packets always find a route to their destination."
+    },
+    {
+        "id": 5,
+        "title": "Hardware PCB",
+        "images": [
+            "https://placehold.co/800x600/1a1a1a/ffffff?text=PCB+Design",
+            "https://placehold.co/800x600/000000/ffffff?text=Schematic",
+            "https://placehold.co/800x600/2a2a2a/ffffff?text=3D+Render"
+        ],
+        "desc": "Custom multi-layer PCB design for our sensor modules, optimized for power efficiency and signal integrity.\n\nDesign specifications:\n\n- 4-layer board stackup.\n- Integrated power management IC (PMIC).\n- Onboard ESP32 microcontroller.\n- Compact form factor (30mm x 30mm).\n\nThe PCB layout minimizes electromagnetic interference (EMI) and ensures reliable operation in harsh industrial environments."
+    },
+    {
+        "id": 6,
+        "title": "Mobile App",
+        "images": [
+            "https://placehold.co/800x600/1a1a1a/ffffff?text=Mobile+App",
+            "https://placehold.co/800x600/000000/ffffff?text=Biometric+Login",
+            "https://placehold.co/800x600/2a2a2a/ffffff?text=Device+Map"
+        ],
+        "desc": "The companion mobile application allows users to monitor and control their devices on the go.\n\nCore functionalities:\n\n- **Biometric Login:** Secure access via FaceID or Fingerprint.\n- **Push Notifications:** Instant alerts for critical events.\n- **Remote Configuration:** Update device settings from anywhere.\n\nBuilt with React Native to ensure a native look and feel on both iOS and Android platforms."
+    }
+]

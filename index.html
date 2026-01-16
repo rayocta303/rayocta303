@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en" class="h-screen overflow-hidden">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanif Bagus Saputra Hadi</title>
+    <meta name="description" content="Portfolio of Hanif Bagus Saputra Hadi - Fullstack Developer & IoT Enthusiast.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;400;600&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/js/tailwind.config.js"></script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Devicon -->
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/TextPlugin.min.js"></script>
+    <!-- Marked.js for Markdown Parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <link rel="stylesheet" href="assets/css/ui.css">
+    <link rel="stylesheet" href="assets/css/ui2.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body x-data="portfolio">
+
+    <!-- Preloader -->
+    <div id="preloader"
+        class="fixed inset-0 z-[100] flex flex-col items-center justify-center font-mono text-brand-green bg-black">
+        <div id="loader-percentage" class="text-6xl font-black tracking-tighter">0%</div>
+    </div>
+
+    <!-- Background Elements (Fixed) -->
+    <div class="fixed inset-0 z-0 bg-brand-darker">
+        <div class="perspective-container">
+            <div class="grid-floor"></div>
+        </div>
+        <div
+            class="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-green/5 rounded-full blur-[120px] mix-blend-screen animate-pulse pointer-events-none">
+        </div>
+    </div>
+
+    <!-- HUD Overlay -->
+    <div class="fixed inset-0 pointer-events-none z-50 overflow-hidden">
+        <div class="absolute inset-0 vignette"></div>
+        <div class="absolute inset-0 scanlines opacity-20"></div>
+        <div class="hud-corner tl"></div>
+        <div class="hud-corner tr"></div>
+        <div class="hud-corner bl"></div>
+        <div class="hud-corner br"></div>
+        <div class="absolute top-6 left-7 text-[10px] text-brand-green font-mono tracking-widest opacity-70">
+            SYS.ONLINE // V.2.0.4 <br> TARGET: USER_INTERFACE
+        </div>
+        <!-- <div
+            class="absolute bottom-6 right-16 text-[10px] text-brand-cyan font-mono tracking-widest opacity-70 text-right">
+            COORDS: <span id="coords">00:00:00</span> <br> MEMORY: OPTIMAL
+        </div> -->
+    </div>
+
+    <!-- MAIN GRID LAYOUT -->
+    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 h-screen w-full">
+
+        <!-- LEFT COLUMN: Menu & Title -->
+        <div class="lg:col-span-5 flex flex-col justify-center px-8 md:pl-20 relative h-full pointer-events-auto">
+            <div class="mb-12">
+                <span
+                    class="text-white font-bold tracking-[0.5em] uppercase text-xs mb-2 block pl-1 max-w-fit bg-brand-darker/50 backdrop-blur-sm px-2">It's
+                    me</span>
+                <h1
+                    class="font-heading text-3xl sm:text-4xl md:text-5xl font-black tracking-tighter text-white leading-none uppercase filter">
+                    Hanif Bagus Saputra Hadi
+                </h1>
+                <p
+                    class="text-sm sm:text-lg md:text-xl text-gray-400 mt-4 font-mono uppercase tracking-widest pl-1 bg-brand-darker/50 backdrop-blur-sm max-w-fit px-2">
+                    IoT_Enthusiast <span class="text-white">//</span> Fullstack_Dev
+                </p>
+            </div>
+
+            <div class="flex flex-col gap-2 items-start" id="main-menu">
+                <!-- About -->
+                <button @click="playSound(); setTab('about')"
+                    class="group flex items-center gap-4 text-2xl md:text-3xl font-bold text-gray-500 hover:text-white transition-all duration-200 uppercase tracking-wider py-2">
+                    <span class="transition-all duration-200 group-hover:translate-x-4 group-hover:tracking-widest"
+                        :class="{ 'text-white': activeTab === 'about' }">About</span>
+                </button>
+
+                <!-- Projects -->
+                <button @click="playSound(); setTab('projects')"
+                    class="group flex items-center gap-4 text-2xl md:text-3xl font-bold text-gray-500 hover:text-white transition-all duration-200 uppercase tracking-wider py-2">
+                    <span class="transition-all duration-200 group-hover:translate-x-4 group-hover:tracking-widest"
+                        :class="{ 'text-white': activeTab === 'projects' }">Projects</span>
+                </button>
+
+                <!-- Tech Stack -->
+                <button @click="playSound(); setTab('tech')"
+                    class="group flex items-center gap-4 text-2xl md:text-3xl font-bold text-gray-500 hover:text-white transition-all duration-200 uppercase tracking-wider py-2">
+                    <span class="transition-all duration-200 group-hover:translate-x-4 group-hover:tracking-widest"
+                        :class="{ 'text-white': activeTab === 'tech' }">Tech Stack</span>
+                </button>
+
+                <!-- Services -->
+                <button @click="playSound(); setTab('services')"
+                    class="group flex items-center gap-4 text-2xl md:text-3xl font-bold text-gray-500 hover:text-white transition-all duration-200 uppercase tracking-wider py-2">
+                    <span class="transition-all duration-200 group-hover:translate-x-4 group-hover:tracking-widest"
+                        :class="{ 'text-white': activeTab === 'services' }">Services</span>
+                </button>
+
+                <!-- Gallery -->
+                <button @click="playSound(); setTab('gallery')"
+                    class="group flex items-center gap-4 text-2xl md:text-3xl font-bold text-gray-500 hover:text-white transition-all duration-200 uppercase tracking-wider py-2">
+                    <span class="transition-all duration-200 group-hover:translate-x-4 group-hover:tracking-widest"
+                        :class="{ 'text-white': activeTab === 'gallery' }">Gallery</span>
+                </button>
+
+                <!-- Connect -->
+                <button @click="playSound(); setTab('connect')"
+                    class="group flex items-center gap-4 text-2xl md:text-3xl font-bold text-gray-500 hover:text-white transition-all duration-200 uppercase tracking-wider py-2">
+                    <span class="transition-all duration-200 group-hover:translate-x-4 group-hover:tracking-widest"
+                        :class="{ 'text-white': activeTab === 'connect' }">Connect</span>
+                </button>
+
+                <!-- Sound Toggle -->
+                <button @click="toggleSound()"
+                    class="mt-8 flex items-center gap-2 text-sm font-mono text-gray-500 hover:text-white transition-colors">
+                    <div class="w-8 h-8 flex items-center justify-center border border-gray-700 rounded bg-black/50">
+                        <i class="fa-solid"
+                            :class="soundEnabled ? 'fa-volume-high text-brand-green' : 'fa-volume-xmark'"></i>
+                    </div>
+                    <span class="tracking-widest" x-text="soundEnabled ? 'AUDIO: ON' : 'AUDIO: OFF'"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Content Panel -->
+        <!-- Logic: Desktop = Relative/Scrolling. Mobile = Fixed/Modal -->
+        <div class="lg:col-span-7 h-full w-full pointer-events-auto overflow-y-auto"
+            :class="{ 'fixed inset-0 z-50 bg-brand-darker lg:relative lg:bg-transparent lg:inset-auto': mobileOpen, 'hidden lg:block': !mobileOpen }"
+            x-show="mobileOpen || window.innerWidth >= 1024" x-transition:enter="vhs-enter-active"
+            x-transition:leave="vhs-leave-active"
+            :style="{ '--vhs-in': 'vhs-in-' + glitchSeed, '--vhs-out': 'vhs-out-' + glitchSeed }">
+
+            <!-- TV Static Overlay (Mobile Only) -->
+            <div class="tv-static-overlay lg:hidden" x-show="mobileOpen" x-transition:enter="tv-static-active-in"
+                x-transition:leave="transition-opacity duration-200" x-transition:leave-start="opacity-0"
+                x-transition:leave-end="opacity-0">
+            </div>
+
+            <!-- Mobile Close Button -->
+            <button @click="mobileOpen = false"
+                class="lg:hidden absolute top-6 right-7 text-white text-2xl z-50 hover:text-brand-green">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <!-- <div class="lg:hidden absolute top-6 left-6 text-brand-green font-mono text-xs tracking-widest z-50">
+                // DATA_LOG_VIEWER
+            </div> -->
+
+            <!-- Content Container -->
+            <div id="content-scroll"
+                class="h-full max-h-full w-full overflow-x-hidden overflow-y-auto custom-scrollbar p-6 md:p-12 lg:pt-32">
+                <div class="mt-16 md:mt-0">
+                    <!-- CONTENT: About -->
+                    <div x-show="activeTab === 'about'" x-transition:enter="vhs-enter-active"
+                        x-transition:leave="vhs-leave-active" class="origin-top" style="display: none;"
+                        :style="{ '--vhs-in': 'vhs-in-' + glitchSeed, '--vhs-out': 'vhs-out-' + glitchSeed }">
+                        <template x-if="about">
+                            <div class="space-y-12">
+                                <!-- Header -->
+                                <div class="mb-8">
+                                    <h2
+                                        class="font-heading text-4xl font-bold text-white mb-2 drop-shadow-[0_0_10px_rgba(0,255,255,0.5)]">
+                                        About Me</h2>
+                                    <div class="w-full h-px bg-gradient-to-r from-white to-transparent"></div>
+                                </div>
+
+                                <!-- Bio & Stats -->
+                                <div class="gap-8">
+                                    <div class="space-y-6">
+                                        <h3 class="text-2xl font-bold text-white font-heading" x-text="about.tagline">
+                                        </h3>
+                                        <div class="text-gray-400 leading-relaxed space-y-4 text-justify prose prose-invert max-w-none"
+                                            x-html="parseMarkdown(about.bio)"></div>
+                                    </div>
+                                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+                                        <template x-for="stat in about.stats" :key="stat.label">
+                                            <div
+                                                class="bg-brand-darker/50 border border-gray-800 p-6 rounded-lg text-center hover:border-brand-cyan/50 transition-colors">
+                                                <div class="text-3xl font-black text-white mb-1" x-text="stat.value">
+                                                </div>
+                                                <div class="text-xs text-gray-500 uppercase tracking-widest"
+                                                    x-text="stat.label"></div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+
+                                <!-- Experience & Education -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                                    <!-- Experience -->
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                                            <i class="fa-solid fa-briefcase text-brand-cyan"></i> Experience
+                                        </h3>
+                                        <div class="space-y-8 border-l border-gray-800 ml-3 pl-8 relative">
+                                            <template x-for="exp in about.experience" :key="exp.company">
+                                                <div class="relative">
+                                                    <span
+                                                        class="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-brand-darker border-2 border-brand-cyan"></span>
+                                                    <div class="mb-1 text-sm text-brand-cyan font-mono"
+                                                        x-text="exp.year"></div>
+                                                    <h4 class="text-white font-bold text-lg" x-text="exp.role"></h4>
+                                                    <div class="text-gray-500 text-sm mb-2" x-text="exp.company"></div>
+                                                    <p class="text-gray-400 text-sm leading-relaxed" x-text="exp.desc">
+                                                    </p>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+
+                                    <!-- Education -->
+                                    <div>
+                                        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-3">
+                                            <i class="fa-solid fa-graduation-cap text-brand-green"></i> Education
+                                        </h3>
+                                        <div class="space-y-8 border-l border-gray-800 ml-3 pl-8 relative">
+                                            <template x-for="edu in about.education" :key="edu.degree">
+                                                <div class="relative">
+                                                    <span
+                                                        class="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-brand-darker border-2 border-brand-green"></span>
+                                                    <div class="mb-1 text-sm text-brand-green font-mono"
+                                                        x-text="edu.year"></div>
+                                                    <h4 class="text-white font-bold text-lg" x-text="edu.degree"></h4>
+                                                    <div class="text-gray-500 text-sm mb-2" x-text="edu.school"></div>
+                                                    <p class="text-gray-400 text-sm leading-relaxed" x-text="edu.desc">
+                                                    </p>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <!-- CONTENT: Projects -->
+                    <div x-show="activeTab === 'projects'" x-transition:enter="vhs-enter-active"
+                        x-transition:leave="vhs-leave-active" class="origin-top"
+                        :style="{ '--vhs-in': 'vhs-in-' + glitchSeed, '--vhs-out': 'vhs-out-' + glitchSeed }">
+                        <div class="mb-8">
+                            <h2
+                                class="font-heading text-4xl font-bold text-white mb-2 drop-shadow-[0_0_10px_rgba(57,255,20,0.5)]">
+                                Featured Projects</h2>
+                            <div class="w-full h-px bg-gradient-to-r from-white to-transparent"></div>
+                        </div>
+
+                        <div class="grid grid-cols-1 gap-6 pb-20">
+                            <template x-for="project in projects" :key="project.id">
+                                <div class="si-buttons-scifi__style-8__button-3 scifi-card group hover:-translate-y-1 transition-transform duration-300"
+                                    :class="'accent-' + project.color">
+                                    <helper-1></helper-1>
+                                    <ripple></ripple>
+                                    <!-- <shine></shine> -->
+                                    <div class="relative z-10 w-full">
+                                        <div class="flex justify-between items-start mb-4">
+                                            <h3 class="font-heading text-2xl font-bold text-white transition-colors"
+                                                :class="'group-hover:text-brand-' + project.color"
+                                                x-text="project.title"></h3>
+                                            <span class="text-xs font-mono px-2 py-1 rounded border animate-pulse"
+                                                :class="`bg-brand-${project.color}/20 text-brand-${project.color} border-brand-${project.color}/30`"
+                                                x-text="project.status"></span>
+                                        </div>
+                                        <p class="text-gray-400 mb-4 text-sm leading-relaxed" x-text="project.desc"></p>
+                                        <div class="flex flex-wrap gap-2 mb-6">
+                                            <template x-for="tag in project.tags">
+                                                <span
+                                                    class="text-xs font-mono text-gray-500 border border-gray-700 px-2 py-1 rounded"
+                                                    x-text="tag"></span>
+                                            </template>
+                                        </div>
+                                        <a :href="project.link" target="_blank"
+                                            class="text-sm font-bold hover:text-white transition-colors flex items-center gap-2"
+                                            :class="'text-brand-' + project.color">
+                                            <span x-text="project.linkText"></span> <i
+                                                class="fa-solid fa-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- CONTENT: Tech Stack -->
+                    <div x-show="activeTab === 'tech'" x-transition:enter="vhs-enter-active"
+                        x-transition:leave="vhs-leave-active" class="origin-top" style="display: none;"
+                        :style="{ '--vhs-in': 'vhs-in-' + glitchSeed, '--vhs-out': 'vhs-out-' + glitchSeed }">
+                        <div class="mb-8">
+                            <h2
+                                class="font-heading text-4xl font-bold text-white mb-2 drop-shadow-[0_0_10px_rgba(0,255,157,0.5)]">
+                                Tech Stack</h2>
+                            <div class="w-full h-px bg-gradient-to-r from-white to-transparent"></div>
+                        </div>
+
+                        <!-- Languages -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold text-gray-400 mb-4 border-l-4 border-brand-green pl-4">
+                                Languages
+                            </h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                                <!-- PHP -->
+                                <div style="--border-color: #777BB4;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg"
+                                            class="w-8 h-8" alt="PHP" />
+                                        <span class="text-xs font-mono text-gray-300">PHP</span>
+                                    </div>
+                                </div>
+                                <!-- HTML5 -->
+                                <div style="--border-color: #E34F26;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"
+                                            class="w-8 h-8" alt="HTML5" />
+                                        <span class="text-xs font-mono text-gray-300">HTML5</span>
+                                    </div>
+                                </div>
+                                <!-- CSS3 -->
+                                <div style="--border-color: #1572B6;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-plain.svg"
+                                            class="w-8 h-8" alt="CSS3" />
+                                        <span class="text-xs font-mono text-gray-300">CSS3</span>
+                                    </div>
+                                </div>
+                                <!-- JS -->
+                                <div style="--border-color: #F7DF1E;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"
+                                            class="w-8 h-8 rounded" alt="JavaScript" />
+                                        <span class="text-xs font-mono text-gray-300">JavaScript</span>
+                                    </div>
+                                </div>
+                                <!-- Python -->
+                                <div style="--border-color: #3776AB;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
+                                            class="w-8 h-8" alt="Python" />
+                                        <span class="text-xs font-mono text-gray-300">Python</span>
+                                    </div>
+                                </div>
+                                <!-- C++ -->
+                                <div style="--border-color: #00599C;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg"
+                                            class="w-8 h-8" alt="C++" />
+                                        <span class="text-xs font-mono text-gray-300">C++</span>
+                                    </div>
+                                </div>
+                                <!-- MicroPython -->
+                                <div style="--border-color: #2B5B84;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
+                                            class="w-8 h-8" alt="MicroPython" />
+                                        <span class="text-xs font-mono text-gray-300">MicroPython</span>
+                                    </div>
+                                </div>
+                                <!-- Golang -->
+                                <div style="--border-color: #00ADD8;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg"
+                                            class="w-8 h-8" alt="Golang" />
+                                        <span class="text-xs font-mono text-gray-300">Golang</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Frameworks & Libraries -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold text-gray-400 mb-4 border-l-4 border-brand-cyan pl-4">
+                                Frameworks & Libraries</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                                <!-- Laravel -->
+                                <div style="--border-color: #FF2D20;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg"
+                                            class="w-8 h-8" alt="Laravel" />
+                                        <span class="text-xs font-mono text-gray-300">Laravel</span>
+                                    </div>
+                                </div>
+                                <!-- CodeIgniter -->
+                                <div style="--border-color: #EE4323;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/codeigniter/codeigniter-plain.svg"
+                                            class="w-8 h-8" alt="CodeIgniter" />
+                                        <span class="text-xs font-mono text-gray-300">CodeIgniter</span>
+                                    </div>
+                                </div>
+                                <!-- Vue -->
+                                <div style="--border-color: #4FC08D;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg"
+                                            class="w-8 h-8" alt="Vue.js" />
+                                        <span class="text-xs font-mono text-gray-300">Vue.js</span>
+                                    </div>
+                                </div>
+                                <!-- Livewire -->
+                                <div style="--border-color: #FB70A9;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/livewire/livewire-original.svg"
+                                            class="w-8 h-8" alt="Livewire" />
+                                        <span class="text-xs font-mono text-gray-300">Livewire</span>
+                                    </div>
+                                </div>
+                                <!-- Tailwind -->
+                                <div style="--border-color: #06B6D4;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
+                                            class="w-8 h-8" alt="Tailwind" />
+                                        <span class="text-xs font-mono text-gray-300">Tailwind</span>
+                                    </div>
+                                </div>
+                                <!-- Bootstrap -->
+                                <div style="--border-color: #7952B3;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bootstrap/bootstrap-original.svg"
+                                            class="w-8 h-8" alt="Bootstrap" />
+                                        <span class="text-xs font-mono text-gray-300">PHP</span>
+                                    </div>
+                                </div>
+                                <!-- Node.js -->
+                                <div style="--border-color: #339933;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg"
+                                            class="w-8 h-8" alt="Node.js" />
+                                        <span class="text-xs font-mono text-gray-300">Node.js</span>
+                                    </div>
+                                </div>
+                                <!-- Next.js -->
+                                <div style="--border-color: #FFFFFF;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg"
+                                            class="w-8 h-8 invert" alt="Next.js" />
+                                        <span class="text-xs font-mono text-gray-300">Next.js</span>
+                                    </div>
+                                </div>
+                                <!-- WordPress -->
+                                <div style="--border-color: #21759B;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-plain.svg"
+                                            class="w-8 h-8" alt="WordPress" />
+                                        <span class="text-xs font-mono text-gray-300">WordPress</span>
+                                    </div>
+                                </div>
+                                <!-- Electron -->
+                                <div style="--border-color: #47848F;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/electron/electron-original.svg"
+                                            class="w-8 h-8" alt="Electron" />
+                                        <span class="text-xs font-mono text-gray-300">Electron</span>
+                                    </div>
+                                </div>
+                                <!-- Symfony -->
+                                <div style="--border-color: #FFFFFF;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/symfony/symfony-original.svg"
+                                            class="w-8 h-8 invert" alt="Symfony" />
+                                        <span class="text-xs font-mono text-gray-300">Symfony</span>
+                                    </div>
+                                </div>
+                                <!-- OpenCV -->
+                                <div style="--border-color: #5C3EE8;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/opencv/opencv-original.svg"
+                                            class="w-8 h-8" alt="OpenCV" />
+                                        <span class="text-xs font-mono text-gray-300">OpenCV</span>
+                                    </div>
+                                </div>
+                                <!-- Expo -->
+                                <div style="--border-color: #FFFFFF;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/expo/expo-original.svg"
+                                            class="w-8 h-8 invert" alt="Expo" />
+                                        <span class="text-xs font-mono text-gray-300">Expo</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- IoT & Hardware -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold text-gray-400 mb-4 border-l-4 border-brand-pink pl-4">IoT &
+                                Hardware</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                                <!-- Arduino -->
+                                <div style="--border-color: #00979D;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/arduino/arduino-original.svg"
+                                            class="w-8 h-8" alt="Arduino" />
+                                        <span class="text-xs font-mono text-gray-300">Arduino</span>
+                                    </div>
+                                </div>
+                                <!-- Raspberry Pi -->
+                                <div style="--border-color: #C51A4A;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/raspberrypi/raspberrypi-original.svg"
+                                            class="w-8 h-8" alt="Raspberry Pi" />
+                                        <span class="text-xs font-mono text-gray-300">Raspberry Pi</span>
+                                    </div>
+                                </div>
+                                <!-- Gerber/Schematic -->
+                                <div style="--border-color: #00C853;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <i class="fa-solid fa-microchip text-3xl text-gray-400"></i>
+                                        <span class="text-xs font-mono text-gray-300">PCB Design</span>
+                                    </div>
+                                </div>
+                                <!-- MQTT -->
+                                <div style="--border-color: #660066;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <i class="fa-solid fa-network-wired text-3xl text-gray-400"></i>
+                                        <span class="text-xs font-mono text-gray-300">MQTT</span>
+                                    </div>
+                                </div>
+                                <!-- EMQX -->
+                                <div style="--border-color: #26D07C;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <i class="fa-solid fa-satellite-dish text-3xl text-gray-400"></i>
+                                        <span class="text-xs font-mono text-gray-300">EMQX</span>
+                                    </div>
+                                </div>
+                                <!-- IFTTT -->
+                                <div style="--border-color: #33CCFF;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <i class="fa-solid fa-toggle-on text-3xl text-gray-400"></i>
+                                        <span class="text-xs font-mono text-gray-300">IFTTT</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Databases -->
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold text-gray-400 mb-4 border-l-4 border-brand-green pl-4">
+                                Databases</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                                <!-- MySQL -->
+                                <div style="--border-color: #4479A1;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg"
+                                            class="w-8 h-8" alt="MySQL" />
+                                        <span class="text-xs font-mono text-gray-300">MySQL</span>
+                                    </div>
+                                </div>
+                                <!-- PostgreSQL -->
+                                <div style="--border-color: #336791;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg"
+                                            class="w-8 h-8" alt="PostgreSQL" />
+                                        <span class="text-xs font-mono text-gray-300">PostgreSQL</span>
+                                    </div>
+                                </div>
+                                <!-- Redis -->
+                                <div style="--border-color: #DC382D;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg"
+                                            class="w-8 h-8" alt="Redis" />
+                                        <span class="text-xs font-mono text-gray-300">Redis</span>
+                                    </div>
+                                </div>
+                                <!-- MariaDB -->
+                                <div style="--border-color: #003545;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg"
+                                            class="w-8 h-8" alt="MariaDB" />
+                                        <span class="text-xs font-mono text-gray-300">MariaDB</span>
+                                    </div>
+                                </div>
+                                <!-- Firebase -->
+                                <div style="--border-color: #FFCA28;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-plain.svg"
+                                            class="w-8 h-8" alt="Firebase" />
+                                        <span class="text-xs font-mono text-gray-300">Firebase</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tools -->
+                        <div class="mb-20">
+                            <h3 class="text-xl font-bold text-gray-400 mb-4 border-l-4 border-brand-cyan pl-4">
+                                Tools</h3>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                                <!-- Git -->
+                                <div style="--border-color: #F05032;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg"
+                                            class="w-8 h-8" alt="Git" />
+                                        <span class="text-xs font-mono text-gray-300">Git</span>
+                                    </div>
+                                </div>
+                                <!-- VS Code -->
+                                <div style="--border-color: #007ACC;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg"
+                                            class="w-8 h-8" alt="VS Code" />
+                                        <span class="text-xs font-mono text-gray-300">VS Code</span>
+                                    </div>
+                                </div>
+                                <!-- Docker -->
+                                <div style="--border-color: #2496ED;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-plain.svg"
+                                            class="w-8 h-8" alt="Docker" />
+                                        <span class="text-xs font-mono text-gray-300">Docker</span>
+                                    </div>
+                                </div>
+                                <!-- AWS -->
+                                <div style="--border-color: #FF9900;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg"
+                                            class="w-8 h-8" alt="AWS" />
+                                        <span class="text-xs font-mono text-gray-300">AWS</span>
+                                    </div>
+                                </div>
+                                <!-- Cloudflare -->
+                                <div style="--border-color: #F38020;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cloudflare/cloudflare-original.svg"
+                                            class="w-8 h-8" alt="Cloudflare" />
+                                        <span class="text-xs font-mono text-gray-300">Cloudflare</span>
+                                    </div>
+                                </div>
+                                <!-- Nginx -->
+                                <div style="--border-color: #009639;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nginx/nginx-original.svg"
+                                            class="w-8 h-8" alt="Nginx" />
+                                        <span class="text-xs font-mono text-gray-300">Nginx</span>
+                                    </div>
+                                </div>
+                                <!-- Composer -->
+                                <div style="--border-color: #885630;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/composer/composer-original.svg"
+                                            class="w-8 h-8" alt="Composer" />
+                                        <span class="text-xs font-mono text-gray-300">Composer</span>
+                                    </div>
+                                </div>
+                                <!-- NPM -->
+                                <div style="--border-color: #CB3837;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/npm/npm-original-wordmark.svg"
+                                            class="w-8 h-8" alt="NPM" />
+                                        <span class="text-xs font-mono text-gray-300">NPM</span>
+                                    </div>
+                                </div>
+                                <!-- Postman -->
+                                <div style="--border-color: #FF6C37;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-plain.svg"
+                                            class="w-8 h-8" alt="Postman" />
+                                        <span class="text-xs font-mono text-gray-300">Postman</span>
+                                    </div>
+                                </div>
+                                <!-- cPanel -->
+                                <div style="--border-color: #FF6C2C;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <i class="fa-brands fa-cpanel text-3xl text-gray-400"></i>
+                                        <span class="text-xs font-mono text-gray-300">cPanel</span>
+                                    </div>
+                                </div>
+                                <!-- Ngrok -->
+                                <div style="--border-color: #c2c2c2;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <i class="fa-solid fa-terminal text-3xl text-gray-400"></i>
+                                        <span class="text-xs font-mono text-gray-300">Ngrok</span>
+                                    </div>
+                                </div>
+                                <!-- Chrome -->
+                                <div style="--border-color: #4285F4;"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card flex flex-col items-center justify-center gap-2 hover:bg-white/5 transition-colors">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div class="relative z-10 flex flex-col items-center justify-center gap-2">
+                                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/chrome/chrome-original.svg"
+                                            class="w-8 h-8" alt="Chrome" />
+                                        <span class="text-xs font-mono text-gray-300">Chrome</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- CONTENT: Services -->
+                    <div x-show="activeTab === 'services'" x-transition:enter="vhs-enter-active"
+                        x-transition:leave="vhs-leave-active" class="origin-top" style="display: none;"
+                        :style="{ '--vhs-in': 'vhs-in-' + glitchSeed, '--vhs-out': 'vhs-out-' + glitchSeed }">
+                        <div class="mb-8">
+                            <h2
+                                class="font-heading text-4xl font-bold text-white mb-2 drop-shadow-[0_0_10px_rgba(0,255,255,0.5)]">
+                                Services</h2>
+                            <div class="w-full h-px bg-gradient-to-r from-white to-transparent"></div>
+                        </div>
+
+                        <div class="space-y-4 mb-8">
+                            <p class="text-gray-400 max-w-2xl text-lg font-light leading-relaxed">
+                                Providing professional solutions for your digital and hardware needs.
+                            </p>
+                        </div>
+
+                        <!-- Services Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-20">
+                            <template x-for="service in services" :key="service.id">
+                                <div
+                                    class="group relative bg-brand-darker/50 border border-gray-800 p-8 rounded-lg overflow-hidden hover:border-brand-cyan/50 transition-colors duration-300">
+
+                                    <!-- Icon -->
+                                    <div
+                                        class="mb-6 inline-block p-4 rounded-lg bg-white/5 group-hover:bg-brand-cyan/10 transition-colors duration-300">
+                                        <i :class="service.icon"
+                                            class="text-3xl text-gray-400 group-hover:text-brand-cyan transition-colors duration-300"></i>
+                                    </div>
+
+                                    <!-- Content -->
+                                    <h3 class="text-xl font-bold text-white mb-3" x-text="service.title"></h3>
+                                    <p class="text-gray-400 text-sm leading-relaxed" x-text="service.desc"></p>
+
+                                    <!-- Hover Decoration -->
+                                    <div
+                                        class="absolute top-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <i class="fa-solid fa-arrow-right -rotate-45 text-brand-cyan text-sm"></i>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- CONTENT: Connect -->
+                    <div x-show="activeTab === 'connect'" x-transition:enter="vhs-enter-active"
+                        x-transition:leave="vhs-leave-active" class="origin-top" style="display: none;"
+                        :style="{ '--vhs-in': 'vhs-in-' + glitchSeed, '--vhs-out': 'vhs-out-' + glitchSeed }">
+                        <div class="mb-8">
+                            <h2 class="font-heading text-4xl font-bold text-white mb-2">Connect</h2>
+                            <div class="w-full h-px bg-gradient-to-r from-white to-transparent"></div>
+                        </div>
+
+                        <div class="flex flex-col gap-4 max-w-md">
+                            <a href="https://instagram.com/unxchr" target="_blank"
+                                class="si-buttons-scifi__style-8__button-3 scifi-card flex items-center gap-4 hover:border-purple-500 hover:text-purple-400 transition-all group">
+                                <helper-1></helper-1>
+                                <ripple></ripple>
+                                <!-- <shine></shine> -->
+                                <div class="relative z-10 flex items-center gap-4 w-full">
+                                    <div
+                                        class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-purple-500/20">
+                                        <i class="fa-brands fa-instagram text-2xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-white">Instagram</h4>
+                                        <span class="text-xs text-gray-500 font-mono">@unxchr</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="https://www.linkedin.com/in/hanif-bagus-saputra-hadi-77738b260/" target="_blank"
+                                class="si-buttons-scifi__style-8__button-3 scifi-card flex items-center gap-4 hover:border-blue-500 hover:text-blue-400 transition-all group">
+                                <helper-1></helper-1>
+                                <ripple></ripple>
+                                <!-- <shine></shine> -->
+                                <div class="relative z-10 flex items-center gap-4 w-full">
+                                    <div
+                                        class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-blue-500/20">
+                                        <i class="fa-brands fa-linkedin text-2xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-white">LinkedIn</h4>
+                                        <span class="text-xs text-gray-500 font-mono">Hanif Bagus Saputra Hadi</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="mailto:its.unxchr@gmail.com"
+                                class="si-buttons-scifi__style-8__button-3 scifi-card flex items-center gap-4 hover:border-red-500 hover:text-red-400 transition-all group">
+                                <helper-1></helper-1>
+                                <ripple></ripple>
+                                <!-- <shine></shine> -->
+                                <div class="relative z-10 flex items-center gap-4 w-full">
+                                    <div
+                                        class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-red-500/20">
+                                        <i class="fa-solid fa-envelope text-2xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-white">Email Encrypted</h4>
+                                        <span class="text-xs text-gray-500 font-mono">its.unxchr@gmail.com</span>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- GitHub: rayocta303 -->
+                            <a href="https://github.com/rayocta303" target="_blank"
+                                class="si-buttons-scifi__style-8__button-3 scifi-card flex items-center gap-4 hover:border-white hover:text-gray-300 transition-all group">
+                                <helper-1></helper-1>
+                                <ripple></ripple>
+                                <div class="relative z-10 flex items-center gap-4 w-full">
+                                    <div
+                                        class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-white/20">
+                                        <i class="fa-brands fa-github text-2xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-white">GitHub</h4>
+                                        <span class="text-xs text-gray-500 font-mono">rayocta303</span>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- GitHub: repo-unx -->
+                            <a href="https://github.com/repo-unx" target="_blank"
+                                class="si-buttons-scifi__style-8__button-3 scifi-card flex items-center gap-4 hover:border-white hover:text-gray-300 transition-all group">
+                                <helper-1></helper-1>
+                                <ripple></ripple>
+                                <div class="relative z-10 flex items-center gap-4 w-full">
+                                    <div
+                                        class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-white/20">
+                                        <i class="fa-brands fa-github text-2xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-white">GitHub (Repo)</h4>
+                                        <span class="text-xs text-gray-500 font-mono">repo-unx</span>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- GitHub: WowoEngine -->
+                            <a href="https://github.com/WowoEngine" target="_blank"
+                                class="si-buttons-scifi__style-8__button-3 scifi-card flex items-center gap-4 hover:border-white hover:text-gray-300 transition-all group">
+                                <helper-1></helper-1>
+                                <ripple></ripple>
+                                <div class="relative z-10 flex items-center gap-4 w-full">
+                                    <div
+                                        class="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-white/20">
+                                        <i class="fa-brands fa-github text-2xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-white">GitHub (Engine)</h4>
+                                        <span class="text-xs text-gray-500 font-mono">WowoEngine</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- CONTENT: Gallery -->
+                    <div x-show="activeTab === 'gallery'" x-transition:enter="vhs-enter-active"
+                        x-transition:leave="vhs-leave-active" class="origin-top" style="display: none;"
+                        :style="{ '--vhs-in': 'vhs-in-' + glitchSeed, '--vhs-out': 'vhs-out-' + glitchSeed }">
+                        <div class="mb-8">
+                            <h2 class="font-heading text-4xl font-bold text-white mb-2">Gallery</h2>
+                            <div class="w-full h-px bg-gradient-to-r from-white to-transparent"></div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <template x-for="item in galleryItems" :key="item.id">
+                                <div @click="openGallery(item)"
+                                    class="si-buttons-scifi__style-7__button-1 scifi-card aspect-square flex flex-col items-center justify-center p-0 hover:border-white/50 transition-colors group cursor-pointer relative overflow-hidden">
+                                    <helper-1></helper-1>
+                                    <helper-2></helper-2>
+                                    <ripple></ripple>
+                                    <div
+                                        class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                                    </div>
+                                    <!-- Image Background -->
+                                    <img :src="item.images[0]" :alt="item.title"
+                                        class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-all duration-500 scale-100 group-hover:scale-110">
+
+                                    <!-- Overlay Content -->
+                                    <div
+                                        class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/90 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-30">
+                                        <h4 class="text-white font-bold text-sm truncate" x-text="item.title"></h4>
+                                        <span class="text-xs font-mono text-gray-400 block"
+                                            x-text="'ID: ' + item.id"></span>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Gallery Modal -->
+    <div x-show="galleryModalOpen" style="display: none;"
+        class="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+
+        <!-- Backdrop -->
+        <div x-show="galleryModalOpen" x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0 backdrop-blur-none"
+            x-transition:enter-end="opacity-100 backdrop-blur-md" x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 backdrop-blur-md"
+            x-transition:leave-end="opacity-0 backdrop-blur-none" class="absolute inset-0 bg-black/80 backdrop-blur-md"
+            @click="closeGallery()"></div>
+
+        <!-- Modal Content -->
+        <div x-show="galleryModalOpen" x-transition:enter="transition ease-out duration-300 delay-100"
+            x-transition:enter-start="opacity-0 translate-y-10 scale-95"
+            x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+            x-transition:leave="transition ease-in duration-200"
+            x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+            x-transition:leave-end="opacity-0 translate-y-10 scale-95"
+            class="relative w-full max-w-5xl h-[85vh] bg-black border border-gray-800 rounded-lg overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col md:flex-row"
+            @click.stop>
+
+            <!-- Close Button -->
+            <button @click="closeGallery()"
+                class="absolute top-4 right-4 z-50 text-white hover:text-red-500 transition-colors bg-black/50 p-2 rounded-full backdrop-blur-sm">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- Image Container -->
+            <div
+                class="w-full md:w-2/3 h-1/2 md:h-full bg-black flex items-center justify-center p-2 relative group md:border-r border-gray-800">
+                <template x-if="activeGalleryItem">
+                    <div class="contents">
+                        <img :src="activeGalleryItem.images[currentImageIndex]" :alt="activeGalleryItem.title"
+                            class="w-full h-full object-contain transition-opacity duration-300">
+
+                        <!-- Slider Controls -->
+                        <div class="absolute inset-x-4 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none"
+                            x-show="activeGalleryItem.images.length > 1">
+                            <button @click.stop="prevImage()"
+                                class="pointer-events-auto bg-black/50 hover:bg-brand-green/80 text-white p-2 rounded-full backdrop-blur-sm transition-all shadow-lg hover:scale-110">
+                                <i class="fa-solid fa-chevron-left text-xl"></i>
+                            </button>
+                            <button @click.stop="nextImage()"
+                                class="pointer-events-auto bg-black/50 hover:bg-brand-green/80 text-white p-2 rounded-full backdrop-blur-sm transition-all shadow-lg hover:scale-110">
+                                <i class="fa-solid fa-chevron-right text-xl"></i>
+                            </button>
+                        </div>
+
+                        <!-- Image Counter -->
+                        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white text-xs font-mono px-3 py-1 rounded-full backdrop-blur-sm"
+                            x-show="activeGalleryItem.images.length > 1">
+                            <span x-text="currentImageIndex + 1"></span> / <span
+                                x-text="activeGalleryItem.images.length"></span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <!-- Details Sidebar -->
+            <div
+                class="w-full md:w-1/3 h-1/2 md:h-full border-t md:border-t-0 p-6 md:p-8 flex flex-col bg-brand-darker/50 overflow-y-auto">
+                <template x-if="activeGalleryItem">
+                    <div class="h-full flex flex-col">
+                        <span class="text-brand-cyan font-mono text-xs tracking-widest mb-2"
+                            x-text="'ID: ' + activeGalleryItem.id"></span>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-4 font-heading"
+                            x-text="activeGalleryItem.title"></h3>
+                        <div class="text-gray-400 border-t border-gray-800 pt-4 leading-relaxed mb-auto text-sm prose prose-invert prose-sm max-w-none prose-p:mb-4 prose-ul:list-disc prose-ul:pl-4 prose-li:mb-1"
+                            x-html="parseMarkdown(activeGalleryItem.desc)">
+                        </div>
+
+                        <div class="mt-8 pt-6 border-t border-gray-800 flex justify-between items-end">
+                            <div class="flex flex-col gap-1">
+                                <span class="text-[10px] text-gray-600 uppercase tracking-widest">Date</span>
+                                <span class="text-xs font-mono text-gray-400">2023.10.27</span>
+                            </div>
+                            <button
+                                class="text-white hover:text-brand-green transition-colors text-sm font-mono flex items-center gap-2 group">
+                                VIEW PROJECT <i
+                                    class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <!-- GSAP Animations (Simplified) -->
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>

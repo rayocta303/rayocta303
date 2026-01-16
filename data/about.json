@@ -1,0 +1,40 @@
+{
+    "bio": "I am a dedicated **Fullstack Developer** and **IoT Enthusiast** with a passion for building scalable web applications and integrating them with physical hardware. With a strong foundation in modern web technologies and embedded systems, I specialize in creating end-to-end solutions that bridge the gap between the digital and physical worlds.",
+    "tagline": "Building the future, one byte at a time.",
+    "stats": [
+        {
+            "label": "Years Experience",
+            "value": "4+"
+        },
+        {
+            "label": "Projects Completed",
+            "value": "20+"
+        },
+        {
+            "label": "Happy Clients",
+            "value": "15+"
+        }
+    ],
+    "experience": [
+        {
+            "year": "2023 - Present",
+            "role": "Freelance Fullstack Developer",
+            "company": "Self-Employed",
+            "desc": "Developing custom web solutions and IoT systems for various clients. Specializing in Laravel, Vue.js, and ESP32 integration."
+        },
+        {
+            "year": "2021 - 2023",
+            "role": "Junior Web Developer",
+            "company": "Tech Solutions Inc.",
+            "desc": "Collaborated with a team to build and maintain e-commerce platforms. Gained expertise in backend API development and database management."
+        }
+    ],
+    "education": [
+        {
+            "year": "2019 - 2023",
+            "degree": "Bachelor of Informatics",
+            "school": "University of Technology",
+            "desc": "Focused on Software Engineering and Embedded Systems. Graduated with honors."
+        }
+    ]
+}

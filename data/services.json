@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "title": "Web Development",
+        "icon": "fa-solid fa-code",
+        "desc": "Custom websites built with modern frameworks (Laravel, Vue, React, Alpine.js). Responsive, fast, and SEO-friendly."
+    },
+    {
+        "id": 2,
+        "title": "System Maintenance",
+        "icon": "fa-solid fa-screwdriver-wrench",
+        "desc": "Regular updates, bug fixes, security patches, and performance optimization for your existing web applications."
+    },
+    {
+        "id": 3,
+        "title": "Final Year Projects",
+        "icon": "fa-solid fa-graduation-cap",
+        "desc": "Assistance with IT/Engineering final projects (Skripsi/TA), including coding, documentation, and consultation."
+    },
+    {
+        "id": 4,
+        "title": "IoT Solutions",
+        "icon": "fa-solid fa-wifi",
+        "desc": "End-to-end IoT development: sensor integration, data transmission (MQTT/HTTP), and dashboard monitoring."
+    },
+    {
+        "id": 5,
+        "title": "Schematic Design",
+        "icon": "fa-solid fa-diagram-project",
+        "desc": "Professional electronic schematic diagrams tailored to your specific project requirements."
+    },
+    {
+        "id": 6,
+        "title": "PCB Design",
+        "icon": "fa-solid fa-microchip",
+        "desc": "Custom PCB layout design (Eagle/KiCad/EasyEDA), from single-layer to multi-layer boards."
+    },
+    {
+        "id": 7,
+        "title": "Hardware Assembly",
+        "icon": "fa-solid fa-toolbox",
+        "desc": "Component soldering, casing assembly, and full hardware integration testing."
+    }
+]

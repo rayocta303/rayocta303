@@ -1,0 +1,65 @@
+[
+    {
+        "id": "sawitdb",
+        "title": "SawitDB",
+        "status": "OPEN SOURCE",
+        "desc": "High-performance, distributed NoSQL database optimized for edge computing and IoT data storage.",
+        "link": "https://github.com/WowoEngine/SawitDB",
+        "linkText": "[ GO TO REPOSITORY ]",
+        "tags": [
+            "Node.js",
+            "Database Engine",
+            "Open Source"
+        ],
+        "color": "green"
+    },
+    {
+        "id": "qris-gate",
+        "title": "QRIS Gateway",
+        "status": "SAAS",
+        "desc": "Seamless payment integration platform supporting standardized QRIS payments for high-volume transactions.",
+        "link": "https://gate.tixgo.asia/",
+        "linkText": "[ GO TO SITE ]",
+        "tags": [
+            "Laravel",
+            "API Integration",
+            "Payment Gateway",
+            "Fintech"
+        ],
+        "color": "cyan"
+    },
+    {
+        "id": "ai-cs-agent",
+        "title": "Ai CS Agent",
+        "status": "DEMO",
+        "desc": "Intelligent Customer Service agent powered by LLMs to automate support tickets and provide instant responses.",
+        "link": "https://demo-cs-agent.tixgo.asia/",
+        "linkText": "[ GO TO SITE ]",
+        "tags": [
+            "PHP",
+            "Chatbot",
+            "Puter.js",
+            "AI",
+            "LLM",
+            "NLP"
+        ],
+        "color": "purple"
+    },
+    {
+        "id": "tooge",
+        "title": "Tooge System",
+        "status": "UNDER DEVELOPMENT",
+        "desc": "Advanced IoT platform for orchestrating organic growth. Real-time monitoring and automated irrigation control.",
+        "link": "https://tooge-id.github.io",
+        "linkText": "[ GO TO SITE ]",
+        "tags": [
+            "Laravel",
+            "Livewire",
+            "Tailwind CSS",
+            "MQTT",
+            "IoT",
+            "Organic Growth"
+        ],
+        "color": "pink"
+    }
+]
